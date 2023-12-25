@@ -1,4 +1,4 @@
-FROM rust:1-slim-bookworm AS builder
+FROM --platform=$BUILDPLATFORM rust:1-slim-bookworm AS builder
 
 RUN apt-get update && \
     apt-get install -y build-essential
@@ -7,7 +7,7 @@ COPY . /app
 WORKDIR /app
 RUN cargo build --release
 
-FROM debian:bookworm-slim
+FROM --platform=$BUILDPLATFORM debian:bookworm-slim
 RUN apt-get update && apt-get install  -o Dpkg::Options::=--force-confdef -yq --no-install-recommends \
     postgresql-client \
     # Clean up layer

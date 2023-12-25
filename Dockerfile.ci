@@ -1,4 +1,4 @@
-FROM cimg/rust:1.67.1
+FROM --platform=$BUILDPLATFORM cimg/rust:1.67.1
 COPY --from=sclevine/yj /bin/yj /bin/yj
 RUN /bin/yj -h
 RUN sudo apt-get update && \
